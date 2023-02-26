@@ -260,6 +260,14 @@ To geotag videos with a GPX file, video start time (video creation time minus vi
 mapillary_tools video_process MY_VIDEO_DIR --geotag_source "gpx" --geotag_source_path MY_EXTERNAL_GPS.gpx
 ```
 
+If your video file contains no GPS data then you will need to disable distance based sampling and provide a time based sampling value.
+
+```sh
+mapillary_tools video_process MY_VIDEO_DIR --geotag_source "gpx" --geotag_source_path MY_EXTERNAL_GPS.gpx \
+  --video_sample_distance -1 \
+  --video_sample_interval 1
+```
+
 Ideally, the GPS device and the capture device should use the same clock to get the timestamps synchronized.
 If not, as is often the case, the image locations will be shifted. To solve that, mapillary_tools provides an
 option `--interpolation_offset_time N` that adds N seconds to image capture times for synchronizing the timestamps.
